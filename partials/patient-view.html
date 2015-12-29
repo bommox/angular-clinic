@@ -1,0 +1,48 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo left">{{patient.name}}</a>
+        
+        <ul id="nav-mobile" class="right">
+            <li><a ng-click="confirmDeletePatient()">Borrar</a></li>
+            <li><a ng-click="updatePatient()" ng-show="patientViewForm.$dirty">Actualizar</a></li>
+        </ul>
+    </div>
+</nav>
+<form class="container" name="patientViewForm">
+        <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input ng-model="patient.name" id="icon_prefix" type="text">
+                    <label for="icon_prefix" class="active">First Name</label>
+                </div>
+                <div class="input-field col s6">
+                    <input ng-model="patient.surname" id="icon_telephone" type="tel">
+                    <label for="icon_telephone" class="active">Apellidos</label>
+                </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">phone</i>
+                <input ng-model="patient.phone" id="email" type="text">
+                <label for="email" class="active">Phone</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mail</i>
+                <input ng-model="patient.email" id="email" type="email">
+                <label for="email" class="active">Email</label>
+            </div>
+        </div>
+    </form>
+    
+    <!-- Modal Structure -->
+  <div id="modalConfirmDelete" class="modal">
+    <div class="modal-content">
+      <h4>Borrar Usuario</h4>
+      <p>¿Seguro que quiere borrar el usuario {{patient.name}} {{patient.surname}}?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" ng-click="deletePatient()" class=" modal-action modal-close waves-effect waves-green btn-flat">Borrar</a>
+    </div>
+  </div>

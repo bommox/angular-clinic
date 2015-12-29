@@ -1,7 +1,24 @@
+html, body, .height-max {
+    height : 100%;
+}
+
+.scroll {
+    overflow: auto;
+}
+
 .no-padding {
     padding: 0;
 }
 
 .no-marging {
     margin: 0;
+}
+
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-max {
+    flex: 9;
 }
