@@ -24,3 +24,22 @@ app.controller('PatientListCtrl', function ($scope, $firebaseArray) {
         $scope.newName = "";
   };
 });
+
+app.controller('PatientCreateCtrl', function ($scope, $firebaseArray) {
+  
+  var refPatiens = new Firebase("https://angularclinic.firebaseio.com/patients");
+  // download the data into a local object
+  var getKey = function() {
+    return   $scope.newpatient.surname + $scope.newpatient.name;
+  };
+  $scope.createNewPatient = function() {        
+        $firebaseArray(refPatiens).$add($scope.newpatient);
+        $scope.resetNewPatient();
+  };
+  $scope.resetNewPatient = function() {
+        $scope.newpatient.name = "";
+        $scope.newpatient.surname = "";
+        $scope.newpatient.email = "";
+        $scope.newpatient.phone = "";
+  };
+});
