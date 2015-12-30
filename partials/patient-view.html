@@ -1,61 +1,70 @@
-<nav>
-    <div class="nav-wrapper teal darken-1">
-        <a href="" class="brand-logo left">Datos del paciente</a>
-        
-        <ul id="nav-mobile" class="right">
-            <li><a ng-click="confirmDeletePatient()"><i class="material-icons right">delete</i> Borrar</a></li>
-            <li><a href ng-click="updatePatient()" ng-show="patientViewForm.$dirty"><i class="material-icons right">save</i> Actualizar</a></li>
-        </ul>
-    </div>
-</nav>
-<form  name="patientViewForm" >
-    <div class="container" ng-if="patient.name">
-        <h2 ng-click="patient.pinned = !patient.pinned; patient.$save();">         
-            <i class="medium material-icons left amber-text" ng-show="patient.pinned">star</i> 
-            <i class="medium material-icons left" ng-hide="patient.pinned">star_border</i></a>
-            {{patient.name}} {{patient.surname}}</h2>
-        <div class="row">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input ng-model="patient.name" id="icon_prefix" type="text">
-                    <label for="icon_prefix" class="active">First Name</label>
+<div class="row height-max">
+        <div    class="col s4 m4 l3 no-padding flex-vertical height-max" 
+                ng-controller="PatientListCtrl" 
+                ng-include="'partials/patients-list.html'">
+        </div>
+        <div class="col s8 m8 l9 no-padding height-max">
+            
+            <nav>
+                <div class="nav-wrapper teal darken-1">
+                    <a href="" class="brand-logo left">Datos del paciente</a>
+                    
+                    <ul id="nav-mobile" class="right">
+                        <li><a ng-click="confirmDeletePatient()"><i class="material-icons right">delete</i> Borrar</a></li>
+                        <li><a href ng-click="updatePatient()" ng-show="patientViewForm.$dirty"><i class="material-icons right">save</i> Actualizar</a></li>
+                    </ul>
                 </div>
-                <div class="input-field col s6">
-                    <input ng-model="patient.surname" id="icon_telephone" type="tel">
-                    <label for="icon_telephone" class="active">Apellidos</label>
+            </nav>
+            <form  name="patientViewForm" >
+                <div class="container" ng-if="patient.name">
+                    <h2 ng-click="patient.pinned = !patient.pinned; patient.$save();">         
+                        <i class="medium material-icons left amber-text" ng-show="patient.pinned">star</i> 
+                        <i class="medium material-icons left" ng-hide="patient.pinned">star_border</i></a>
+                        {{patient.name}} {{patient.surname}}</h2>
+                    <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input ng-model="patient.name" id="icon_prefix" type="text">
+                                <label for="icon_prefix" class="active">First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input ng-model="patient.surname" id="icon_telephone" type="tel">
+                                <label for="icon_telephone" class="active">Apellidos</label>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input ng-model="patient.phone" id="email" type="text">
+                            <label for="email" class="active">Phone</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">mail</i>
+                            <input ng-model="patient.email" id="email" type="email">
+                            <label for="email" class="active">Email</label>
+                        </div>
+                    </div>        
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">mail</i>
+                            <input name="date" type="date" class="datepicker" ng-model="patient.birthInput">
+                            <label for="date" class="active">Fecha de nacimiento</label>
+                        </div>
+                    </div>
                 </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">phone</i>
-                <input ng-model="patient.phone" id="email" type="text">
-                <label for="email" class="active">Phone</label>
+            </form>
+                
+                <!-- Modal Structure -->
+            <div id="modalConfirmDelete" class="modal">
+                <div class="modal-content">
+                <h4>Borrar Usuario</h4>
+                <p>¿Seguro que quiere borrar el usuario {{patient.name}} {{patient.surname}}?</p>
+                </div>
+                <div class="modal-footer">
+                <a href="#" ng-click="deletePatient()" class=" modal-action modal-close waves-effect waves-green btn-flat">Borrar</a>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">mail</i>
-                <input ng-model="patient.email" id="email" type="email">
-                <label for="email" class="active">Email</label>
-            </div>
-        </div>        
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">mail</i>
-                <input name="date" type="date" class="datepicker" ng-model="patient.birthInput">
-                <label for="date" class="active">Fecha de nacimiento</label>
-            </div>
-        </div>
-    </div>
- </form>
-    
-    <!-- Modal Structure -->
-  <div id="modalConfirmDelete" class="modal">
-    <div class="modal-content">
-      <h4>Borrar Usuario</h4>
-      <p>¿Seguro que quiere borrar el usuario {{patient.name}} {{patient.surname}}?</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" ng-click="deletePatient()" class=" modal-action modal-close waves-effect waves-green btn-flat">Borrar</a>
-    </div>
-  </div>
+</div>
