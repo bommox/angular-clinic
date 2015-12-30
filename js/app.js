@@ -27,7 +27,7 @@ app.run(function($location, $rootScope, Auth, AuthData) {
     $rootScope.$on('$locationChangeStart', function(event, newUrl) {
         if (newUrl.indexOf("login") > -1 || Auth.$getAuth()) {
             $rootScope.auth = Auth;
-            console.log(Auth.$getAuth());
+            //console.log(Auth.$getAuth());
             //Todo OK
         } else {
             console.log("Forbidden! log required!");

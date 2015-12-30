@@ -30,7 +30,6 @@ app.factory("AuthData", function(Auth) {
    return {
               
        getShortName : function() {
-           console.log("short name");
            var result = null;
            if (getData()) {
                if (getData().provider == 'google') {

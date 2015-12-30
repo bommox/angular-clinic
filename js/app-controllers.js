@@ -44,10 +44,12 @@ app.controller('PatientCreateCtrl', function ($scope, $firebaseArray, toast, $lo
   
   $scope.newpatient = $scope.newpatient || {};
   $scope.newpatient.pinned = false;
-  $scope.newpatient.birthInput = new Date();
+ 
         
   $scope.createNewPatient = function() {  
-      $scope.newpatient.birth = $scope.newpatient.birthInput.getTime();
+      if ($scope.newpatient.birthInput) {
+          $scope.newpatient.birth = $scope.newpatient.birthInput.getTime();
+      }      
         $firebaseArray(refPatiens).$add($scope.newpatient).then(function(ref) {
             toast("Usuario " + $scope.newpatient.name + $scope.newpatient.surname + " creado");
             $location.path("/patient/" + ref.key());
@@ -74,7 +76,10 @@ app.controller('PatientViewCtrl', function ($scope, $firebaseObject, $routeParam
   $scope.patient.pinned = false;
   
   $scope.updatePatient = function() {
-      $scope.patient.birth = $scope.patient.birthInput.getTime();
+      if ($scope.patient.birthInput) {
+           $scope.patient.birth = $scope.patient.birthInput.getTime();
+      }
+     
       $scope.patient.$save().then(function() {
             $scope.patient.birthInput = new Date($scope.patient.birth);
             $scope.patientViewForm.$setPristine(); 
