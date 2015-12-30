@@ -17,8 +17,13 @@
         </a>
         <a href="#/patient/{{patient.$id}}" class="collection-item  black-text"  ng-repeat="patient in patients | filter:searchFilter | orderBy:['-pinned','+surname','name']">
             <i class="material-icons grey-text left" ng-hide="patient.pinned">star_border</i> 
-            <i class="material-icons amber-text left" ng-show="patient.pinned">star</i> 
-            {{patient.name}} {{patient.surname}}
+            <i class="material-icons amber-text left" ng-show="patient.pinned">star</i>
+            <span ng-show="daysToBirthday(patient.birth) < 7" class="red-text right">
+                <i class="material-icons">cake</i>
+                {{daysToBirthday(patient.birth)}}
+            </span>
+            
+            {{patient.name}} {{patient.surname}} 
         </a>
     </div>
 </div>
