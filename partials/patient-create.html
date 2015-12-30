@@ -1,14 +1,15 @@
 <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper teal darken-1">
         <a href="#" class="brand-logo left">Nuevo paciente</a>
         
         <ul id="nav-mobile" class="right">
-            <li><a href="#!" ng-click="resetNewPatient()">Cancelar</a></li>
-            <li><a href="#!" ng-click="createNewPatient()" ng-show="patientCreateForm.$valid ">Crear</a></li>
+            <li><a href="#" ng-click="resetNewPatient()">Cancelar</a></li>
+            <li><a href="" ng-click="createNewPatient()" ng-show="patientCreateForm.$valid "><i class="material-icons right">save</i> Crear</a></li>
         </ul>
     </div>
 </nav>
 <form class="container" name="patientCreateForm">
+    <h2>{{newpatient.name}} {{newpatient.surname}}</h2>
     <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>

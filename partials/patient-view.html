@@ -1,14 +1,19 @@
 <nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo left">{{patient.name}}</a>
+    <div class="nav-wrapper teal darken-1">
+        <a href="" class="brand-logo left">Datos del paciente</a>
         
         <ul id="nav-mobile" class="right">
-            <li><a ng-click="confirmDeletePatient()">Borrar</a></li>
-            <li><a ng-click="updatePatient()" ng-show="patientViewForm.$dirty">Actualizar</a></li>
+            <li><a ng-click="confirmDeletePatient()"><i class="material-icons right">delete</i> Borrar</a></li>
+            <li><a href ng-click="updatePatient()" ng-show="patientViewForm.$dirty"><i class="material-icons right">save</i> Actualizar</a></li>
         </ul>
     </div>
 </nav>
-<form class="container" name="patientViewForm">
+<form  name="patientViewForm" >
+    <div class="container" ng-if="patient.name">
+        <h2 ng-click="patient.pinned = !patient.pinned; patient.$save();">         
+            <i class="medium material-icons left amber-text" ng-show="patient.pinned">star</i> 
+            <i class="medium material-icons left" ng-hide="patient.pinned">star_border</i></a>
+            {{patient.name}} {{patient.surname}}</h2>
         <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">account_circle</i>
@@ -34,7 +39,8 @@
                 <label for="email" class="active">Email</label>
             </div>
         </div>
-    </form>
+    </div>
+ </form>
     
     <!-- Modal Structure -->
   <div id="modalConfirmDelete" class="modal">

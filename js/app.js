@@ -32,6 +32,13 @@ app.config(function($routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
 });
 
+app.factory('toast', function($window) {
+    return function(msg, time) {
+        time = time || 3000;
+        $window.Materialize.toast(msg, time);
+    };
+});
+
 app.controller('PatientListCtrl', function ($scope, $firebaseArray) {
   
   var ref = new Firebase("https://angularclinic.firebaseio.com/patients");
@@ -43,13 +50,19 @@ app.controller('PatientListCtrl', function ($scope, $firebaseArray) {
   };
 });
 
-app.controller('PatientCreateCtrl', function ($scope, $firebaseArray) {
+app.controller('PatientCreateCtrl', function ($scope, $firebaseArray, toast, $location) {
   
   var refPatiens = new Firebase("https://angularclinic.firebaseio.com/patients");
   
+  $scope.newpatient = $scope.newpatient || {};
+  $scope.newpatient.pinned = false;
+        
   $scope.createNewPatient = function() {        
-        $firebaseArray(refPatiens).$add($scope.newpatient);
-        Materialize.toast("Usuario " + $scope.newpatient.name + " creado", 5000);
+        $firebaseArray(refPatiens).$add($scope.newpatient).then(function(ref) {
+            toast("Usuario " + $scope.newpatient.name + $scope.newpatient.surname + " creado");
+            $location.path("/patient/" + ref.key());
+        });
+        
         $scope.resetNewPatient();
   };
   $scope.resetNewPatient = function() {
@@ -60,15 +73,17 @@ app.controller('PatientCreateCtrl', function ($scope, $firebaseArray) {
   };
 });
 
-app.controller('PatientViewCtrl', function ($scope, $firebaseObject, $routeParams) {
+app.controller('PatientViewCtrl', function ($scope, $firebaseObject, $routeParams, toast) {
   
   var refPatient = new Firebase("https://angularclinic.firebaseio.com/patients/" + $routeParams.patientId);
   
   $scope.patient = $firebaseObject(refPatient);
+  $scope.patient.pinned = false;
   
   $scope.updatePatient = function() {
-      $scope.patient.$save();      
-      Materialize.toast("Usuario actualizado", 5000);
+      $scope.patient.$save();
+      $scope.patientViewForm.$setPristine(); 
+      toast("Usuario actualizado", 1200);
   };
   
   $scope.confirmDeletePatient = function() {
@@ -76,7 +91,7 @@ app.controller('PatientViewCtrl', function ($scope, $firebaseObject, $routeParam
   };
   
   $scope.deletePatient = function() {
-     Materialize.toast("Usuario " + $scope.patient.name + " " + $scope.patient.surname + "eliminado", 5000);
+     toast("Usuario " + $scope.patient.name + " " + $scope.patient.surname + " eliminado");
      $scope.patient.$remove();
   };
 });
