@@ -80,8 +80,15 @@ app.controller('PatientViewCtrl', function ($scope, $firebaseObject, $routeParam
            $scope.patient.birth = $scope.patient.birthInput.getTime();
       }
      
+     if (!isNaN($scope.patient.birth)) {
+        $scope.patient.birthInput = new Date($scope.patient.birth);  
+     } else {
+         $scope.patient.birth = null;
+     }
+     
       $scope.patient.$save().then(function() {
-            $scope.patient.birthInput = new Date($scope.patient.birth);
+          
+            
             $scope.patientViewForm.$setPristine(); 
             toast("Usuario actualizado", 1200);
       });
